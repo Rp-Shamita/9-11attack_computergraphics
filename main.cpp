@@ -1,3 +1,4 @@
+#shamita and rashmi
 #ifdef __MINGW32__
  #define APIENTRY __stdcall
  #define CALLBACK __stdcall
