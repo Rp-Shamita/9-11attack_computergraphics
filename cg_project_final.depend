@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1650785238 source:c:\users\hp\desktop\cg_project_final\main.cpp
+1650827219 source:c:\users\hp\desktop\cg_project_final\main.cpp
 	<GL/glut.h>
 	<string.h>
 	<stdio.h>
 	<windows.h>
+	<math.h>
 	<stdio.h>
 	<GL/glut.h>
 	<string.h>
@@ -897,4 +898,7 @@
 	<stdio.h>
 
 1526093414 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\_mingw_print_pop.h
+
+1526093416 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\math.h
+	<crtdefs.h>
 
