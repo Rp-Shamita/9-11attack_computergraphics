@@ -515,7 +515,7 @@ void display()
     glPushMatrix();
     glTranslated(a, c, 0.0);
     glColor3f(1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON); //rightside wing
+    glBegin(GL_POLYGON); //right side wing
     glVertex2f(70.0, 40.0);
     glVertex2f(100.0, 40.0);
     glVertex2f(80.0, 15.0);
