@@ -7,8 +7,6 @@
 #include<string.h>
 #include<stdio.h>
 #include<windows.h>
-#include<math.h>
-# define PI 3.14159265358979323846
 /*
 int i,flag=0,flagb=1,flags=0,flagt=0,flagp=0,flagw=1,flagx=0;
 float a=0.0f,b=0.0f,c=0.0f,m=0.0f,n=0.0f,o=0.0f,p=0.0f,q=0.0f,r=0.0f,x=0.0f,y=0.0f,z=0.0f,a1=0.0,a2=0.0,a3=0.0;
@@ -88,7 +86,7 @@ void screen2()
     glColor3f(1.0,1.0,0.0);
     char str9[]="What would soon be called the most disastrous event in the United States since pearl harbour occured on this fateful morning.";
     drawstring(str9,-0.98,0.50,0.0);
-    /*char str11[]="At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
+    /*char str11[]="At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
     drawstring(str11,-0.3,-0.5,0.0);
     char str12[]="Casualties:";
     drawstring(str12,-0.35,-0.55,0.0);
@@ -135,7 +133,7 @@ void screen3()
 
     char str15[]=" Damage: ";
     drawstring(str15,-0.99,0.35,0.0);
-    char str11[]=" At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
+    char str11[]=" At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
     drawstring(str11,-0.99,0.25,0.0);
     char str12[]=" Clouds of smoke and debris quickly filled the streets of Lower Manhattan. ";
     drawstring(str12,-0.99,0.15,0.0);
@@ -246,8 +244,20 @@ void drawstring(char string[],float x1,float y1,float z1)
 	}
 }
 
+void myinit2()
+{
+    glClearColor(0,0,0,0);
+    glColor3f(1.0, 0.0, 0.0);
+    glPointSize(1.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+    glMatrixMode(GL_MODELVIEW);
+
+}
 void screen1()
 {
+    myinit2();
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
@@ -287,6 +297,7 @@ void screen1()
 
 void screen2()
 {
+    myinit2();
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
@@ -308,7 +319,7 @@ void screen2()
     glColor3f(1.0,1.0,0.0);
     char str9[]="What would soon be called the most disastrous event in the United States since Pearl Harbor occurred on this fateful morning.";
     drawstring(str9,-0.98,0.38,0.0);
-    /*char str11[]="At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
+    /*char str11[]="At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
     drawstring(str11,-0.3,-0.5,0.0);
     char str12[]="Casualties:";
     drawstring(str12,-0.35,-0.55,0.0);
@@ -332,6 +343,7 @@ void screen2()
 
 void screen3()
 {
+    myinit2();
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
@@ -366,7 +378,7 @@ void screen3()
     char str15[]=" Damage: ";
     drawstring(str15,-0.99,-0.25,0.0);
     glColor3f(1.0,1.0,0.0);
-    char str11[]=" At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
+    char str11[]=" At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
     drawstring(str11,-0.99,-0.35,0.0);
     char str12[]=" Clouds of smoke and debris quickly filled the streets of Lower Manhattan. ";
     drawstring(str12,-0.99,-0.45,0.0);
@@ -387,10 +399,6 @@ void screen3()
     glutSwapBuffers();
 
 }
-GLfloat position1 = 0.0f;
-GLfloat speed1 = 0.1f;
-GLfloat position2 = 0.0f;
-GLfloat speed2 = 0.1f;
 
 void update(int);
 void keyPress(unsigned char key, int x, int y) {
@@ -401,6 +409,8 @@ void keyPress(unsigned char key, int x, int y) {
 		if (SCENE_ID == 0)
 			break;
 		SCENE_ID--;
+
+	glutPostRedisplay();
 		break;
 	// Go to Next Scene
 	case 'n':
@@ -410,6 +420,8 @@ void keyPress(unsigned char key, int x, int y) {
 		SCENE_ID++;
 		if (SCENE_ID == 3)
 			glutTimerFunc(0,update,0);
+
+	glutPostRedisplay();
 		break;
 	// Quit Story
 	case 'q':
@@ -420,7 +432,6 @@ void keyPress(unsigned char key, int x, int y) {
 		break;
 	}
 
-	glutPostRedisplay();
 }
 void myinit()
 {
@@ -430,6 +441,8 @@ void myinit()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 499.0, 0.0, 499.0);
+    glMatrixMode(GL_MODELVIEW);
+
 }
 
 void building();
@@ -447,131 +460,9 @@ void update(int value)
     c += 15;        //take off at certain angle on y axis
     if (b <= -78.0) // moving of run way
         b = 0.0;
-    if(position1 > 1.70)
-        position1 = -1.70f;
-    position1 += speed1;
-    if(position2 <-1.70)
-        position2 = 1.70f;
-    position2 -= speed2;
     glutPostRedisplay();
     glutTimerFunc(150, update, 0); //delay
 }
-}
-void cloud(){
-glEnable(GL_LIGHTING);
-  GLfloat global_ambient[] = {4.0, 4.0, 4.0, 0.1};
-  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
-
-
-     glLoadIdentity();
-    glTranslatef(-0.9f,0.5f, 0.0f);
-    glPushMatrix();
-    glTranslatef(position1,0.0f, 0.0f);
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle60;
-    for (int i=0;i<360;i++)
-    {
-        angle60=i*3.1416/180;
-        glVertex2f(0.0+0.05*cos(angle60),0.0+0.05*sin(angle60));
-
-    }
-    glEnd();
-
-     glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle61;
-    for (int i=0;i<360;i++)
-    {
-        angle61=i*3.1416/180;
-        glVertex2f(-0.05+0.05*cos(angle61),-0.05+0.05*sin(angle61));
-
-    }
-    glEnd();
-
-
-
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle62;
-    for (int i=0;i<360;i++)
-    {
-        angle62=i*3.1416/180;
-        glVertex2f(0.07+0.05*cos(angle62),0.0+0.05*sin(angle62));
-
-    }
-    glEnd();
-
-
-       glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle63;
-    for (int i=0;i<360;i++)
-    {
-        angle63=i*3.1416/180;
-        glVertex2f(0.045+0.05*cos(angle63),-0.05+0.05*sin(angle63));
-
-    }
-    glEnd();
-
-    glPopMatrix();
-
-    //CLOUD2
-
-
-      glLoadIdentity();
-    glTranslatef(0.8f,0.8f, 0.0f);
-    glPushMatrix();
-    glTranslatef(position2,0.0f, 0.0f);
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle5;
-    for (int i=0;i<360;i++)
-    {
-        angle5=i*3.1416/180;
-        glVertex2f(0.0+0.05*cos(angle5),0.0+0.05*sin(angle5));
-
-    }
-    glEnd();
-
-     glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle4;
-    for (int i=0;i<360;i++)
-    {
-        angle4=i*3.1416/180;
-        glVertex2f(-0.05+0.05*cos(angle4),-0.05+0.05*sin(angle4));
-
-    }
-    glEnd();
-
-
-
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle3;
-    for (int i=0;i<360;i++)
-    {
-        angle3=i*3.1416/180;
-        glVertex2f(0.07+0.05*cos(angle3),0.0+0.05*sin(angle3));
-
-    }
-    glEnd();
-
-
-       glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle2;
-    for (int i=0;i<360;i++)
-    {
-        angle2=i*3.1416/180;
-        glVertex2f(0.045+0.05*cos(angle2),-0.05+0.05*sin(angle2));
-
-    }
-    glEnd();
-    glPopMatrix();
-
-     glDisable(GL_LIGHTING);
 }
 void display()
 {
@@ -644,7 +535,7 @@ void display()
     glPushMatrix();
     glTranslated(a, c, 0.0);
     glColor3f(1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON); //right side wing
+    glBegin(GL_POLYGON); //rightside wing
     glVertex2f(70.0, 40.0);
     glVertex2f(100.0, 40.0);
     glVertex2f(80.0, 15.0);
@@ -1068,7 +959,6 @@ void display2()
     glVertex2f(50.0, 15.0);
     glEnd();
     glPopMatrix();
-    cloud();
 }
 
 void display3()
@@ -1167,6 +1057,7 @@ void renderScene() {
     case 3:
         display();
         break;
+
 	default:
 		break;
 	}
@@ -1186,3 +1077,4 @@ int main(int argc, char *argv[])
     glutMainLoop();
     return 0;
 }
+
