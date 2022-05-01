@@ -7,15 +7,12 @@
 #include<string.h>
 #include<stdio.h>
 #include<windows.h>
-#include<math.h>
-# define PI 3.14159265358979323846
 /*
 int i,flag=0,flagb=1,flags=0,flagt=0,flagp=0,flagw=1,flagx=0;
 float a=0.0f,b=0.0f,c=0.0f,m=0.0f,n=0.0f,o=0.0f,p=0.0f,q=0.0f,r=0.0f,x=0.0f,y=0.0f,z=0.0f,a1=0.0,a2=0.0,a3=0.0;
 float j;
 int SCENE_ID;
 void *currentfont;
-
 void setFont(void *font)
 {
 	currentfont=font;
@@ -30,7 +27,6 @@ void drawstring(char string[],float x1,float y1,float z1)
         glutBitmapCharacter(currentfont, string[i]);
 	}
 }
-
 void screen1()
 {
     glClearColor(0.0,0.0,0.0,0.0);
@@ -64,7 +60,6 @@ void screen1()
     drawstring(str13,-0.3,-0.6,0.0);
     glFlush();
 }
-
 void screen2()
 {
     glClearColor(0.0,0.0,0.0,0.0);
@@ -102,10 +97,8 @@ void screen2()
     drawstring(str18,-0.99,-0.4,0.0);
     char str19[]="Included in the total were more than 400 police officers and firefighters, who had lost their lives after rushing to the scene and into the towers.";
     drawstring(str19,-0.99,-0.5,0.0);
-
     glFlush();
 }
-
 void screen3()
 {
     glClearColor(0.0,0.0,0.0,0.0);
@@ -131,8 +124,6 @@ void screen3()
     drawstring(str9,-0.98,0.50,0.0);
     char str10[]="The fourth plane,United Airlines flight 93,crashed in the Pennsylvania countryside after its passengers attempted to overpower their assailants.";
     drawstring(str10,-0.98,0.45,0.0);
-
-
     char str15[]=" Damage: ";
     drawstring(str15,-0.99,0.35,0.0);
     char str11[]=" At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
@@ -152,11 +143,8 @@ void screen3()
     drawstring(str18,-0.99,-0.4,0.0);
     char str19[]="Included in the total were more than 400 police officers and firefighters, who had lost their lives after rushing to the scene and into the towers.";
     drawstring(str19,-0.99,-0.5,0.0);
-
     glFlush();
 }
-
-
 void keyPress(unsigned char key, int x, int y) {
 	switch (key) {
 	// Go to Previous Scene
@@ -181,10 +169,8 @@ void keyPress(unsigned char key, int x, int y) {
 	default:
 		break;
 	}
-
 	glutPostRedisplay();
 }
-
 void renderScene() {
 	// Switch to know which scene is playing
 	switch (SCENE_ID) {
@@ -200,12 +186,9 @@ void renderScene() {
 	default:
 		break;
 	}
-
 	// glFush sends it to the Display Buffer
 	glFlush();
 }
-
-
 int main(int argc,char **argv)
 {
     glutInit(&argc,argv);
@@ -246,8 +229,20 @@ void drawstring(char string[],float x1,float y1,float z1)
 	}
 }
 
+void myinit2()
+{
+    glClearColor(0,0,0,0);
+    glColor3f(1.0, 0.0, 0.0);
+    glPointSize(1.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+    glMatrixMode(GL_MODELVIEW);
+
+}
 void screen1()
 {
+    myinit2();
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
@@ -287,6 +282,7 @@ void screen1()
 
 void screen2()
 {
+    myinit2();
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
@@ -332,6 +328,7 @@ void screen2()
 
 void screen3()
 {
+    myinit2();
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
@@ -387,10 +384,6 @@ void screen3()
     glutSwapBuffers();
 
 }
-GLfloat position1 = 0.0f;
-GLfloat speed1 = 0.1f;
-GLfloat position2 = 0.0f;
-GLfloat speed2 = 0.1f;
 
 void update(int);
 void keyPress(unsigned char key, int x, int y) {
@@ -401,6 +394,8 @@ void keyPress(unsigned char key, int x, int y) {
 		if (SCENE_ID == 0)
 			break;
 		SCENE_ID--;
+
+	glutPostRedisplay();
 		break;
 	// Go to Next Scene
 	case 'n':
@@ -408,8 +403,10 @@ void keyPress(unsigned char key, int x, int y) {
 		if (SCENE_ID == 15)
 			break;
 		SCENE_ID++;
-		if (SCENE_ID == 3)
+		if (SCENE_ID == 4)
 			glutTimerFunc(0,update,0);
+
+	glutPostRedisplay();
 		break;
 	// Quit Story
 	case 'q':
@@ -420,7 +417,6 @@ void keyPress(unsigned char key, int x, int y) {
 		break;
 	}
 
-	glutPostRedisplay();
 }
 void myinit()
 {
@@ -430,6 +426,8 @@ void myinit()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 499.0, 0.0, 499.0);
+    glMatrixMode(GL_MODELVIEW);
+
 }
 
 void building();
@@ -441,145 +439,26 @@ void display2();
 void display3();
 void build_outline();
 void update(int value)
-{   if(SCENE_ID==3){
+{   if(SCENE_ID==4){
     a += 20.0;      //Plane position takeoff on x axis
     b -= 10.0;      //Road Strip backward movement
     c += 15;        //take off at certain angle on y axis
     if (b <= -78.0) // moving of run way
         b = 0.0;
-    if(position1 > 1.70)
-        position1 = -1.70f;
-    position1 += speed1;
-    if(position2 <-1.70)
-        position2 = 1.70f;
-    position2 -= speed2;
     glutPostRedisplay();
     glutTimerFunc(150, update, 0); //delay
 }
 }
-void cloud(){
-glEnable(GL_LIGHTING);
-  GLfloat global_ambient[] = {4.0, 4.0, 4.0, 0.1};
-  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 
-
-     glLoadIdentity();
-    glTranslatef(-0.9f,0.5f, 0.0f);
-    glPushMatrix();
-    glTranslatef(position1,0.0f, 0.0f);
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle60;
-    for (int i=0;i<360;i++)
-    {
-        angle60=i*3.1416/180;
-        glVertex2f(0.0+0.05*cos(angle60),0.0+0.05*sin(angle60));
-
-    }
-    glEnd();
-
-     glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle61;
-    for (int i=0;i<360;i++)
-    {
-        angle61=i*3.1416/180;
-        glVertex2f(-0.05+0.05*cos(angle61),-0.05+0.05*sin(angle61));
-
-    }
-    glEnd();
-
-
-
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle62;
-    for (int i=0;i<360;i++)
-    {
-        angle62=i*3.1416/180;
-        glVertex2f(0.07+0.05*cos(angle62),0.0+0.05*sin(angle62));
-
-    }
-    glEnd();
-
-
-       glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle63;
-    for (int i=0;i<360;i++)
-    {
-        angle63=i*3.1416/180;
-        glVertex2f(0.045+0.05*cos(angle63),-0.05+0.05*sin(angle63));
-
-    }
-    glEnd();
-
-    glPopMatrix();
-
-    //CLOUD2
-
-
-      glLoadIdentity();
-    glTranslatef(0.8f,0.8f, 0.0f);
-    glPushMatrix();
-    glTranslatef(position2,0.0f, 0.0f);
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle5;
-    for (int i=0;i<360;i++)
-    {
-        angle5=i*3.1416/180;
-        glVertex2f(0.0+0.05*cos(angle5),0.0+0.05*sin(angle5));
-
-    }
-    glEnd();
-
-     glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle4;
-    for (int i=0;i<360;i++)
-    {
-        angle4=i*3.1416/180;
-        glVertex2f(-0.05+0.05*cos(angle4),-0.05+0.05*sin(angle4));
-
-    }
-    glEnd();
-
-
-
-      glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle3;
-    for (int i=0;i<360;i++)
-    {
-        angle3=i*3.1416/180;
-        glVertex2f(0.07+0.05*cos(angle3),0.0+0.05*sin(angle3));
-
-    }
-    glEnd();
-
-
-       glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    float angle2;
-    for (int i=0;i<360;i++)
-    {
-        angle2=i*3.1416/180;
-        glVertex2f(0.045+0.05*cos(angle2),-0.05+0.05*sin(angle2));
-
-    }
-    glEnd();
-    glPopMatrix();
-
-     glDisable(GL_LIGHTING);
-}
 void display()
 {
     myinit();
     glClear(GL_COLOR_BUFFER_BIT);
     road();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON); //rectangular body
     glVertex2f(0.0, 30.0);
@@ -589,7 +468,9 @@ void display()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON); //upper triangle construction plane
     glVertex2f(135.0, 55.0);
@@ -600,7 +481,9 @@ void display()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(0.0, 0.0, 0.0);
     glBegin(GL_LINE_LOOP); //outline of upper triangle plane
     glVertex2f(135.0, 55.0);
@@ -611,7 +494,9 @@ void display()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_POLYGON); //lower triangle
     glVertex2f(135.0, 40.0);
@@ -622,7 +507,9 @@ void display()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+   if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_POLYGON); //back wing
     glVertex2f(0.0, 55.0);
@@ -632,7 +519,9 @@ void display()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_POLYGON); //left side wing
     glVertex2f(65.0, 55.0);
@@ -642,15 +531,18 @@ void display()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(a, c, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(a, c, 0.0);
+    }
     glColor3f(1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON); //right side wing
+    glBegin(GL_POLYGON); //rightside wing
     glVertex2f(70.0, 40.0);
     glVertex2f(100.0, 40.0);
     glVertex2f(80.0, 15.0);
     glVertex2f(50.0, 15.0);
     glEnd();
     glPopMatrix();
+    if(SCENE_ID==4){
     if (c > 360) //timer to jump to next display
     {
         display2();
@@ -670,6 +562,7 @@ void display()
             blast();
             e = 250;
         }
+    }
     }
     glutSwapBuffers();
 }
@@ -890,7 +783,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON); //white strips on road
     glVertex2f(0.0,20.0);
@@ -900,7 +795,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(50.0, 20.0);
@@ -910,7 +807,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(100.0, 20.0);
@@ -920,7 +819,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(150.0, 20.0);
@@ -930,7 +831,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(200.0, 20.0);
@@ -940,7 +843,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(250.0, 20.0);
@@ -950,7 +855,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(300.0, 20.0);
@@ -960,7 +867,9 @@ void road()
     glEnd();
     glPopMatrix();
     glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(350.0, 20.0);
@@ -970,7 +879,9 @@ void road()
     glEnd();
     glPopMatrix();
      glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(400.0, 20.0);
@@ -980,7 +891,9 @@ void road()
     glEnd();
     glPopMatrix();
      glPushMatrix();
-    glTranslated(b, 0.0, 0.0);
+    if(SCENE_ID==4){
+        glTranslated(b, 0.0, 0.0);
+    }
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex2f(450.0, 20.0);
@@ -1068,7 +981,6 @@ void display2()
     glVertex2f(50.0, 15.0);
     glEnd();
     glPopMatrix();
-    cloud();
 }
 
 void display3()
@@ -1167,10 +1079,12 @@ void renderScene() {
     case 3:
         display();
         break;
+    case 4:
+        display();
+        break;
 	default:
 		break;
 	}
-
 	// glFush sends it to the Display Buffer
 	glFlush();
 }

@@ -902,3 +902,12 @@
 1526093416 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\math.h
 	<crtdefs.h>
 
+1651409884 source:c:\users\hp\desktop\shamita\cg_project_final\main.cpp
+	<GL/glut.h>
+	<string.h>
+	<stdio.h>
+	<windows.h>
+	<stdio.h>
+	<GL/glut.h>
+	<string.h>
+
