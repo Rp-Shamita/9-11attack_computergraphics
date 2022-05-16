@@ -83,7 +83,7 @@ void screen2()
     glColor3f(1.0,1.0,0.0);
     char str9[]="What would soon be called the most disastrous event in the United States since pearl harbour occured on this fateful morning.";
     drawstring(str9,-0.98,0.50,0.0);
-    /*char str11[]="At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
+    /*char str11[]="At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
     drawstring(str11,-0.3,-0.5,0.0);
     char str12[]="Casualties:";
     drawstring(str12,-0.35,-0.55,0.0);
@@ -126,7 +126,7 @@ void screen3()
     drawstring(str10,-0.98,0.45,0.0);
     char str15[]=" Damage: ";
     drawstring(str15,-0.99,0.35,0.0);
-    char str11[]=" At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
+    char str11[]=" At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
     drawstring(str11,-0.99,0.25,0.0);
     char str12[]=" Clouds of smoke and debris quickly filled the streets of Lower Manhattan. ";
     drawstring(str12,-0.99,0.15,0.0);
@@ -304,7 +304,7 @@ void screen2()
     glColor3f(1.0,1.0,0.0);
     char str9[]="What would soon be called the most disastrous event in the United States since Pearl Harbor occurred on this fateful morning.";
     drawstring(str9,-0.98,0.38,0.0);
-    /*char str11[]="At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
+    /*char str11[]="At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. \nClouds of smoke and debris quickly filled the streets of Lower Manhattan. \nOffice workers and residents ran in panic as they tried to outpace the billowing debris clouds.\nA number of other buildings adjacent to the twin towers suffered serious damage, and several subsequently fell. ";
     drawstring(str11,-0.3,-0.5,0.0);
     char str12[]="Casualties:";
     drawstring(str12,-0.35,-0.55,0.0);
@@ -363,7 +363,7 @@ void screen3()
     char str15[]=" Damage: ";
     drawstring(str15,-0.99,-0.25,0.0);
     glColor3f(1.0,1.0,0.0);
-    char str11[]=" At 9:59 AM the World Trade Center’s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
+    char str11[]=" At 9:59 AM the World Trade Centerâ€™s heavily damaged south tower collapsed, and the north tower fell 29 minutes later. ";
     drawstring(str11,-0.99,-0.35,0.0);
     char str12[]=" Clouds of smoke and debris quickly filled the streets of Lower Manhattan. ";
     drawstring(str12,-0.99,-0.45,0.0);
@@ -449,7 +449,6 @@ void update(int value)
     glutTimerFunc(150, update, 0); //delay
 }
 }
-
 void display()
 {
     myinit();
@@ -542,6 +541,36 @@ void display()
     glVertex2f(50.0, 15.0);
     glEnd();
     glPopMatrix();
+    if(SCENE_ID==3){
+        glPushMatrix();
+        glColor3f(0,0,1);
+        glBegin(GL_POLYGON);
+        glVertex2f(200, 30);
+        glVertex2f(200, 70);
+        glVertex2f(300, 70);
+        glVertex2f(300, 30);
+        glEnd();
+        glPopMatrix();
+        glPushMatrix();
+        glColor3f(00.7,0.7,0.7);
+        glBegin(GL_POLYGON);
+        glVertex2f(205,50);
+        glVertex2f(205,67);
+        glVertex2f(295,67);
+        glVertex2f(295, 50);
+        glEnd();
+        glPopMatrix();
+        for(int i=205;i<295;i=i+10)
+        {
+            glPushMatrix();
+            glBegin(GL_LINES);
+            glColor3f(0,0,0);
+            glVertex2f(i+10, 50);
+            glVertex2f(i+10,67);
+            glEnd();
+            glPopMatrix();
+        }
+    }
     if(SCENE_ID==4){
     if (c > 360) //timer to jump to next display
     {
@@ -1064,6 +1093,7 @@ void display3()
     glEnd();
     glPopMatrix();
 }
+
 void renderScene() {
 	// Switch to know which scene is playing
 	switch (SCENE_ID) {
@@ -1100,3 +1130,4 @@ int main(int argc, char *argv[])
     glutMainLoop();
     return 0;
 }
+
